@@ -29,7 +29,7 @@ def get_todos(db = Depends(get_db)):
 @api_router.get('/{task_id}', response_model=TodoOut)
 def get_todo(task_id: int , db = Depends(get_db)):
     stmt = select(Todo).where(Todo.id == task_id)
-    todo = db.scalars(stmt)
+    todo = db.scalar(stmt)
 
     if not todo:
         raise HTTPException(status_code=404, detail="{task_id}-idli todo topilmadi")
